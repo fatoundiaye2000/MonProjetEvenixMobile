@@ -1,51 +1,60 @@
 // navigation/AppNavigator.js
-
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-// Import des écrans
-import LoginScreen from '../screens/LoginScreen';
-import EventsListScreen from '../screens/EventsListScreen';
+import LoginScreen       from '../screens/LoginScreen';
+import RegisterScreen    from '../screens/RegisterScreen';
+import EventsListScreen  from '../screens/EventsListScreen';
 import EventDetailScreen from '../screens/EventDetailScreen';
+import FavoritesScreen   from '../screens/FavoritesScreen';
 
-// Créer le Stack Navigator
-// C'est un objet qui contient 2 composants : Navigator et Screen
 const Stack = createNativeStackNavigator();
 
 export default function AppNavigator() {
   return (
-    // NavigationContainer : conteneur obligatoire, gère l'état de navigation
     <NavigationContainer>
-      {/* Stack.Navigator : définit la pile d'écrans */}
-      {/* initialRouteName : premier écran affiché au lancement */}
       <Stack.Navigator
         initialRouteName="Login"
         screenOptions={{
-          headerStyle: { backgroundColor: '#6200EE' },
-          headerTintColor: '#fff',
-          headerTitleStyle: { fontWeight: 'bold' },
+          headerStyle:      { backgroundColor: '#F97316' },
+          headerTintColor:  '#FFFFFF',
+          headerTitleStyle: { fontWeight: '800', fontSize: 17 },
         }}
       >
-        {/* Écran 1 : Login */}
+        {/* Login — sans header */}
         <Stack.Screen
           name="Login"
           component={LoginScreen}
           options={{ headerShown: false }}
         />
 
-        {/* Écran 2 : Liste des événements */}
+        {/* Inscription — sans header */}
+        <Stack.Screen
+          name="Register"
+          component={RegisterScreen}
+          options={{ headerShown: false }}
+        />
+
+        {/* Liste des événements — pas de retour vers Login */}
         <Stack.Screen
           name="EventsList"
           component={EventsListScreen}
-          options={{ title: 'Événements' }}
+          options={{ title: 'Événements', headerBackVisible: false }}
         />
 
-        {/* Écran 3 : Détail d'un événement */}
+        {/* Détail d'un événement */}
         <Stack.Screen
           name="EventDetail"
           component={EventDetailScreen}
           options={{ title: 'Détail' }}
+        />
+
+        {/* Mes Favoris */}
+        <Stack.Screen
+          name="Favorites"
+          component={FavoritesScreen}
+          options={{ title: '❤️  Mes Favoris' }}
         />
       </Stack.Navigator>
     </NavigationContainer>
